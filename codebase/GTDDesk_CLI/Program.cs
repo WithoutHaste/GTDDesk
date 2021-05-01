@@ -9,10 +9,10 @@ namespace GTDDesk_CLI
         {
             Settings settings = LoadSettings.Run();
 
-            string[] projects = ListProjects.Run(settings);
-            foreach (string project in projects)
+            Project[] projects = ListProjects.Run(settings);
+            foreach (Project project in projects)
             {
-                Console.WriteLine(project);
+                Console.WriteLine(project.Label);
             }
         }
     }

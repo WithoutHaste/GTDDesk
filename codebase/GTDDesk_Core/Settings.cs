@@ -1,5 +1,8 @@
 ﻿namespace GTDDesk_Core
 {
+    /// <summary>
+    /// aka Configuration
+    /// </summary>
     public class Settings
     {
         /// <summary>

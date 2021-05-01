@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.IO;
+using GTDDesk_Core.Internal;
 
 namespace GTDDesk_Core
 {
@@ -8,16 +10,23 @@ namespace GTDDesk_Core
     {
         private const string FILE_EXTENSION = ".txt";
 
-        public static string[] Run(Settings settings)
+        public static Project[] Run(Settings settings)
         {
             string directory = settings.Directory;
             ValidateDirectory(directory);
 
             List<string> files = new List<string>();
             SearchDirectory(directory, ref files);
-            files.CleanPrefixes(directory);
-            files.CleanSuffixes(FILE_EXTENSION);
-            return files.ToArray();
+            Project[] projects = files.Select(file => new Project() { 
+                Path = file,
+                Label = GetProjectLabelFromPath(file, directory)
+            }).ToArray();
+            return projects;
+        }
+
+        private static string GetProjectLabelFromPath(string path, string homeDirectory)
+        {
+            return path.CleanPrefix(homeDirectory).CleanSuffix(FILE_EXTENSION);
         }
 
         private static void SearchDirectory(string directory, ref List<string> foundFiles)
