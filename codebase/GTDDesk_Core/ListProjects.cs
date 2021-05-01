@@ -61,6 +61,10 @@ namespace GTDDesk_Core
                         task += line + "\n";
                     }
                 }
+                if (task != null)
+                {
+                    tasks.Add(task);
+                }
             }
 
             return tasks.ToArray();
