@@ -6,6 +6,8 @@ namespace GTDDesk_Core
 {
     public static class ListProjects
     {
+        private const string FILE_EXTENSION = ".txt";
+
         public static string[] Run(Settings settings)
         {
             string directory = settings.Directory;
@@ -13,23 +15,14 @@ namespace GTDDesk_Core
 
             List<string> files = new List<string>();
             SearchDirectory(directory, ref files);
-            CleanPaths(directory, ref files);
+            files.CleanPrefixes(directory);
+            files.CleanSuffixes(FILE_EXTENSION);
             return files.ToArray();
-        }
-
-        private static void CleanPaths(string prefix, ref List<string> paths)
-        {
-            for (int i = 0; i < paths.Count; i++)
-            {
-                string path = paths[i];
-                if (path.StartsWith(prefix))
-                    paths[i] = path.Substring(prefix.Length);
-            }
         }
 
         private static void SearchDirectory(string directory, ref List<string> foundFiles)
         {
-            foundFiles.AddRange(Directory.GetFiles(directory, "*.txt"));
+            foundFiles.AddRange(Directory.GetFiles(directory, $"*{FILE_EXTENSION}"));
             foreach (string subDirectory in Directory.GetDirectories(directory))
             {
                 SearchDirectory(subDirectory, ref foundFiles);
