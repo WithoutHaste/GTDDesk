@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.Extensions.Configuration;
 using GTDDesk_Core;
 
 namespace GTDDesk_CLI
@@ -8,23 +7,13 @@ namespace GTDDesk_CLI
     {
         static void Main(string[] args)
         {
-            string[] projects = ListProjects.Run();
+            Settings settings = LoadSettings.Run();
+
+            string[] projects = ListProjects.Run(settings);
             foreach (string project in projects)
             {
                 Console.WriteLine(project);
             }
-
-            IConfiguration config = GetConfig();
-            Console.WriteLine(config["Directory"]);
-        }
-
-        private static IConfiguration GetConfig()
-        {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(System.AppContext.BaseDirectory)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-
-            return builder.Build();
         }
     }
 }
