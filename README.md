@@ -7,6 +7,11 @@ Windows app for organizing "Getting Things Done" projects
 Project is starting as a console app aka command line interface.
 
 Run `GTDDesk_CLI.exe` to start.
+- Currently lists the first task from each project
+
+## Folder and File Structure
+
+The app expects to find text files in the `Directory` and in its subdirectories. Each text file is one GTD project. Tasks in each file are separated by one or more blank lines.
 
 ## Configuration
 
