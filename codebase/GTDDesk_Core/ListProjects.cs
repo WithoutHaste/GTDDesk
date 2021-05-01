@@ -17,11 +17,53 @@ namespace GTDDesk_Core
 
             List<string> files = new List<string>();
             SearchDirectory(directory, ref files);
-            Project[] projects = files.Select(file => new Project() { 
+            Project[] projects = LoadProjects(files, directory);
+            return projects;
+        }
+
+        private static Project[] LoadProjects(List<string> files, string homeDirectory)
+        {
+            Project[] projects = files.Select(file => new Project()
+            {
                 Path = file,
-                Label = GetProjectLabelFromPath(file, directory)
+                Label = GetProjectLabelFromPath(file, homeDirectory),
+                Tasks = LoadTasks(file)
             }).ToArray();
             return projects;
+        }
+
+        private static string[] LoadTasks(string fullFileName)
+        {
+            List<string> tasks = new List<string>();
+
+            string line;
+            string task = null;
+            using (StreamReader file = new StreamReader(fullFileName))
+            {
+                while ((line = file.ReadLine()) != null)
+                {
+                    line = line.Trim();
+                    if (string.IsNullOrEmpty(line))
+                    {
+                        if (task == null)
+                        {
+                            //haven't found the next task yet - do nothing
+                        }
+                        else
+                        {
+                            //ending one task, starting another
+                            tasks.Add(task);
+                            task = null;
+                        }
+                    }
+                    else
+                    {
+                        task += line + "\n";
+                    }
+                }
+            }
+
+            return tasks.ToArray();
         }
 
         private static string GetProjectLabelFromPath(string path, string homeDirectory)

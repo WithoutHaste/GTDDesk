@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using GTDDesk_Core;
 
 namespace GTDDesk_CLI
@@ -12,7 +13,9 @@ namespace GTDDesk_CLI
             Project[] projects = ListProjects.Run(settings);
             foreach (Project project in projects)
             {
-                Console.WriteLine(project.Label);
+                Console.WriteLine($"Project {project.Label}:");
+                Console.WriteLine(project.Tasks.FirstOrDefault());
+                Console.WriteLine();
             }
         }
     }

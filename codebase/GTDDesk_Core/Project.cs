@@ -13,5 +13,9 @@
         /// aka display name
         /// </summary>
         public string Label { get; set; }
+        /// <summary>
+        /// Ordered collection of tasks within the project
+        /// </summary>
+        public string[] Tasks { get; set; }
     }
 }
