@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using GTDDesk_Core;
+﻿using GTDDesk_Core;
 
 namespace GTDDesk_CLI
 {
@@ -11,12 +9,7 @@ namespace GTDDesk_CLI
             Settings settings = LoadSettings.Run();
 
             Project[] projects = ListProjects.Run(settings);
-            foreach (Project project in projects)
-            {
-                Console.WriteLine($"Project {project.Label}:");
-                Console.WriteLine(project.Tasks.FirstOrDefault());
-                Console.WriteLine();
-            }
+            Display.ProjectsTable(projects);
         }
     }
 }
