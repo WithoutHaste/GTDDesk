@@ -16,7 +16,7 @@ namespace GTDDesk_Core
             ValidateDirectory(directory);
 
             List<string> files = new List<string>();
-            SearchDirectory(directory, ref files);
+            SearchDirectory(directory, ref files, settings.IncludeSubDirectories);
             Project[] projects = LoadProjects(files, directory);
             return projects;
         }
@@ -71,12 +71,15 @@ namespace GTDDesk_Core
             return path.CleanPrefix(homeDirectory).CleanSuffix(FILE_EXTENSION);
         }
 
-        private static void SearchDirectory(string directory, ref List<string> foundFiles)
+        private static void SearchDirectory(string directory, ref List<string> foundFiles, bool includeSubDirectories)
         {
             foundFiles.AddRange(Directory.GetFiles(directory, $"*{FILE_EXTENSION}"));
-            foreach (string subDirectory in Directory.GetDirectories(directory))
+            if (includeSubDirectories)
             {
-                SearchDirectory(subDirectory, ref foundFiles);
+                foreach (string subDirectory in Directory.GetDirectories(directory))
+                {
+                    SearchDirectory(subDirectory, ref foundFiles, includeSubDirectories);
+                }
             }
         }
 

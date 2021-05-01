@@ -20,6 +20,11 @@ Add a text file called `appsettings.json` in the directory where the `exe` lives
 Template:
 ```
 {
-	"Directory": "full_path_to_directory_containing_project_files"
+	"Directory": "full_path_to_directory_containing_project_files",
+	"IncludeSubDirectories": false
 }
 ```
+
+**Directory** is required.  
+
+**IncludeSubDirectories** defaults to `false`. If true, subdirectories of `Directory` will be recursively searched for more projects.

@@ -10,7 +10,8 @@ namespace GTDDesk_CLI
             IConfiguration config = GetConfig();
             return new Settings()
             {
-                Directory = config["Directory"]
+                Directory = config["Directory"],
+                IncludeSubDirectories = (config["IncludeSubDirectories"].ToLower() == "true")
             };
         }
 
