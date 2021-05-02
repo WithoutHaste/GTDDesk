@@ -5,9 +5,19 @@ namespace GTDDesk_CLI
 {
     public static class CommandLoop
     {
+        private const string DOCUMENTATION_LOCATION = "https://github.com/WithoutHaste/GTDDesk";
+
         public static void Run()
         {
-            ListProjects();
+            try
+            {
+                ListProjects();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine($"See {DOCUMENTATION_LOCATION} for documentation");
+            }
             Console.ReadLine();
         }
 

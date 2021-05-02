@@ -8,10 +8,11 @@ namespace GTDDesk_CLI
         public static Settings Run()
         {
             IConfiguration config = GetConfig();
+
             return new Settings()
             {
                 Directory = config["Directory"],
-                IncludeSubDirectories = (config["IncludeSubDirectories"].ToLower() == "true")
+                IncludeSubDirectories = (config["IncludeSubDirectories"]?.ToLower() == "true")
             };
         }
 
