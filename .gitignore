@@ -1,5 +1,5 @@
 appsettings.*
-bin/
+Debug/
 obj/
 *.vs
 *.user
