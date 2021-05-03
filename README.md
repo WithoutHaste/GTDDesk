@@ -21,10 +21,13 @@ Template:
 ```
 {
 	"Directory": "full_path_to_directory_containing_project_files",
-	"IncludeSubDirectories": false
+	"IncludeSubDirectories": false,
+	"MaxTableWidth": 120
 }
 ```
 
 **Directory** is required.  
 
 **IncludeSubDirectories** defaults to `false`. If true, subdirectories of `Directory` will be recursively searched for more projects.
+
+**MaxTableWidth** is optional. It refers to how many characters across the output table is allowed to be. Text overflowing its column will be wrapped within the column. If this value is left null, the table width will be based on the project labels and task descriptions.

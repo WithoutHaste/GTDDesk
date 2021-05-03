@@ -26,7 +26,7 @@ namespace GTDDesk_CLI
             Settings settings = GetSettings();
 
             Project[] projects = GTDDesk_Core.ListProjects.Run(settings);
-            Display.ProjectsTable(projects);
+            ProjectTablePresenter.Display(projects);
         }
 
         private static Settings GetSettings()

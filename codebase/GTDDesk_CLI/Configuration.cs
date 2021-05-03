@@ -16,7 +16,7 @@ namespace GTDDesk_CLI
                 int value;
                 if (Int32.TryParse(_instance["MaxTableWidth"], out value))
                 {
-                    return Math.Max(0, value);
+                    return value;
                 }
                 return null;
             }
