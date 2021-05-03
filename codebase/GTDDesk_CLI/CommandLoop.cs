@@ -23,10 +23,19 @@ namespace GTDDesk_CLI
 
         private static void ListProjects()
         {
-            Settings settings = LoadSettings.Run();
+            Settings settings = GetSettings();
 
             Project[] projects = GTDDesk_Core.ListProjects.Run(settings);
             Display.ProjectsTable(projects);
+        }
+
+        private static Settings GetSettings()
+        {
+            return new Settings()
+            {
+                Directory = Configuration.Directory,
+                IncludeSubDirectories = Configuration.IncludeSubDirectories
+            };
         }
     }
 }
