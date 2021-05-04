@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using GTDDesk_Core;
@@ -14,14 +15,14 @@ namespace GTDDesk_CLI
         }
 
         /// <summary>
-        /// Determines the longest line in the text, dividing on EndLine characters
+        /// Determines the longest line in the text, given the divider
         /// </summary>
-        public static int MaxLineLength(this string multiLineText)
+        public static int MaxLineLength(this string text, char divider)
         {
-            if (multiLineText == null)
+            if (text == null)
                 return 0;
 
-            return multiLineText.Split("\n").Max(line => line.Length);
+            return text.Split(divider).Max(line => line.Length);
         }
     }
 }

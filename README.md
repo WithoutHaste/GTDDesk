@@ -7,6 +7,7 @@ Windows app for organizing "Getting Things Done" projects
 Project is starting as a console app aka command line interface.
 
 Run `GTDDesk_CLI.exe` to start.
+- File available [here](https://github.com/WithoutHaste/GTDDesk/tree/main/codebase/GTDDesk_CLI/bin/Release/netcoreapp3.1)
 - Currently lists the first task from each project
 
 ## Folder and File Structure
